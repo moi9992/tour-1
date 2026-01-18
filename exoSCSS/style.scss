@@ -1,0 +1,255 @@
+$primary-color: #667eea;
+$secondary-color: #764ba2;
+$accent-color: #f5576c;
+$accent-pink: #f093fb;
+$white: #fff;
+$text-dark: #333;
+$text-gray: #666;
+$gold: #ffd700;
+
+$border-radius: 1rem;
+$border-radius-button: 2rem;
+$spacing: 1.5rem;
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 2rem;
+
+$transition-speed: 0.3s;
+
+$breakpoint-mobile: 767px;
+$breakpoint-tablet: 768px;
+
+// ============================================
+// MIXINS
+// ============================================
+
+// Mixin pour les boutons (réutilisable)
+@mixin button-style($bg-start, $bg-end, $color: $white) {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: $border-radius-button;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all $transition-speed ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, $bg-start 0%, $bg-end 100%);
+  color: $color;
+  box-shadow: 0 4px 15px rgba($bg-start, 0.4);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($bg-start, 0.6);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Mixin pour flexbox
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Mixin pour media queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $breakpoint-mobile) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (min-width: $breakpoint-tablet) {
+      @content;
+    }
+  }
+}
+
+// ============================================
+// BOUCLES SASS
+// ============================================
+
+// Boucle @each pour générer les badges de produits
+$badges: (
+  'new': (#4facfe, #00f2fe, $white),
+  'promo': (#fa709a, #fee140, $white),
+  'outofstock': (#a8a8a8, #6b6b6b, $white),
+  'bestseller': ($gold, #ffed4e, $text-dark)
+);
+
+@each $name, $colors in $badges {
+  .product-card__badge--#{$name} {
+    background: linear-gradient(135deg, nth($colors, 1) 0%, nth($colors, 2) 100%);
+    color: nth($colors, 3);
+  }
+}
+
+// Boucle @for pour générer des classes de colonnes
+@for $i from 1 through 4 {
+  .col-#{$i} {
+    width: percentage(1 / $i);
+  }
+}
+
+// ============================================
+// STYLES DE BASE
+// ============================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  min-height: 100vh;
+  padding: $spacing-large;
+}
+
+// ============================================
+// BLOC SHOP (avec nesting)
+// ============================================
+.shop {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  // Header du shop
+  &__header {
+    background: $white;
+    padding: $spacing-large;
+    border-radius: $border-radius;
+    margin-bottom: $spacing-large;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    @include flex-center(row, space-between, center);
+    flex-wrap: wrap;
+    gap: $spacing-medium;
+
+    // Responsive mobile
+    @include respond-to(mobile) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  // Titre du shop
+  &__title {
+    font-size: 2rem;
+    color: $text-dark;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  // Boutons du header (utilise le mixin)
+  &__btn {
+    @include button-style($primary-color, $secondary-color);
+
+    // Responsive mobile
+    @include respond-to(mobile) {
+      width: 100%;
+    }
+
+    // Modificateur --secondary
+    &--secondary {
+      @include button-style($accent-pink, $accent-color);
+    }
+  }
+}
+
+// ============================================
+// SECTION PRODUCTS (avec nesting)
+// ============================================
+.products {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing;
+
+  // Responsive tablet et +
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ============================================
+// BLOC PRODUCT-CARD (avec nesting)
+// ============================================
+.product-card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-large;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+  position: relative;
+  @include flex-center(column, flex-start, stretch);
+  gap: $spacing-medium;
+
+  // Effet hover
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  // Modificateur --featured (carte mise en avant)
+  &--featured {
+    border: 3px solid $gold;
+    background: linear-gradient(135deg, #fff9e6 0%, $white 100%);
+
+    // Pseudo-élément pour le label "Coup de cœur"
+    &::before {
+      content: "⭐ Coup de cœur";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $gold;
+      color: $text-dark;
+      padding: 0.3rem $spacing-medium;
+      border-radius: $border-radius;
+      font-size: 0.75rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba($gold, 0.4);
+    }
+  }
+
+  // Badge sur la carte
+  &__badge {
+    position: absolute;
+    top: $spacing-medium;
+    right: $spacing-medium;
+    padding: $spacing-small $spacing-medium;
+    border-radius: $border-radius-button;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
+    // Les variantes --new, --promo, --outofstock sont générées par la boucle @each
+  }
+
+  // Titre du produit
+  &__title {
+    font-size: 1.5rem;
+    color: $text-dark;
+    margin-top: $spacing-medium;
+    font-weight: 600;
+  }
+
+  // Prix du produit
+  &__price {
+    font-size: 1.75rem;
+    color: $primary-color;
+    font-weight: bold;
+    margin: $spacing-small 0;
+  }
+
+  // Bouton d'ajout au panier (utilise le mixin)
+  &__btn {
+    @include button-style($primary-color, $secondary-color);
+    margin-top: auto;
+  }
+}

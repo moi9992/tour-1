@@ -1,0 +1,360 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'HolyGolden';
+            src: url('font/HolyGolden.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #273D51 0%, #1a2d3d 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            text-align: center;
+            font-family: 'HolyGolden', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        main h2 {
+            text-align: center;
+            font-family: 'HolyGolden', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #273D51;
+        }
+
+        #productsContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        /* PRODUCT CARDS */
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 320px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #273D51;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-details {
+            flex: 1;
+            background: #0092DA;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 2rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .modal-content img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .modal-content h3 {
+            color: #273D51;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            margin: 1rem 0;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .modal-price {
+            font-size: 2rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin: 1.5rem 0;
+        }
+
+        .btn-close {
+            width: 100%;
+            background: #0092DA;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: #007ab8;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #273D51 0%, #1a2d3d 100%);
+            color: white;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #0092DA;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00b4ff;
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            main h2 {
+                font-size: 1.5rem;
+            }
+
+            .product-card {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .notification {
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
+        }

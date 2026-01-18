@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<header>
+        <h1>CHEIN</h1>
+        <nav>
+            <a href="#accueil">Accueil</a>
+            <a href="#produits">Produits</a>
+            <a href="#apropos">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <h2>Nos Produits (ne contient pas de poupées)</h2>
+        <div id="productsContainer"></div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <img id="modalImage" src="" alt="Produit">
+            <p id="modalDescription"></p>
+            <div class="modal-price" id="modalPrice"></div>
+            <button class="btn-close">Fermer</button>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION -->
+    <div id="notification" class="notification"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 CHEIN - Tous droits réservés</p>
+            <div class="footer-links">
+                <a href="#mentions">Mentions légales</a>
+                <a href="#politique">Politique de confidentialité</a>
+                <a href="#cgv">CGV-CGU</a>
+                <a href="#contact-footer">Nous contacter, surtout en cas de produit suspect</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DONNÉES PRODUITS
+        const products = [
+            {
+                id: 1,
+                name: "Ordinateur portable",
+                description: "PC portable haute performance pour professionnels",
+                price: "899.99€",
+                image: "image/pc.webp"
+            },
+            {
+                id: 2,
+                name: "Smartphone",
+                description: "Téléphone dernière génération avec appareil photo 800MP",
+                price: "699.99€",
+                image: "image/nokia.webp"
+            },
+            {
+                id: 3,
+                name: "Casque audio",
+                description: "Casque sans fil avec réduction de bruit active",
+                price: "249.99€",
+                image: "image/casque-audio-crabe.jpg"
+            },
+            {
+                id: 4,
+                name: "Tablette",
+                description: "Tablette 10 pouces idéale pour la lecture et le streaming",
+                price: "399.99€",
+                image: "image/tablette-de-choco.jpg"
+            },
+            {
+                id: 5,
+                name: "Montre connectée",
+                description: "Montre intelligente avec suivi santé et notifications",
+                price: "299.99€",
+                image: "image/connected-watch.webp"
+            },
+            {
+                id: 6,
+                name: "Appareil Photo Canon",
+                description: "Appareil photo Optimus Gundam 666MP",
+                price: "1299.99€",
+                image: "image/camera-gundam.webp"
+            },
+            {
+                id: 7,
+                name: "Enceinte Bluetooth",
+                description: "Enceinte portable étanche avec son 360°",
+                price: "89.99€",
+                image: "image/bt.jpg"
+            },
+            {
+                id: 8,
+                name: "Console de Jeux",
+                description: "Console nouvelle génération avec SSD ultra-rapide",
+                price: "499.99€",
+                image: "image/GameWatchFire.jpg"
+            },
+            {
+                id: 9,
+                name: "Clavier mécanique",
+                description: "Clavier gaming RGB avec switches mécaniques",
+                price: "129.99€",
+                image: "image/clavier.webp"
+            }
+        ];
+
+        // ÉLÉMENTS DOM
+        const productsContainer = document.getElementById('productsContainer');
+        const modal = document.getElementById('productModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const btnCloseModal = document.querySelector('.btn-close');
+        const notification = document.getElementById('notification');
+
+        // CRÉATION DES CARTES PRODUITS
+        function createProductCards() {
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22320%22 height=%22250%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3EImage%3C/text%3E%3C/svg%3E'">
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">${product.description}</div>
+                        <div class="product-price">${product.price}</div>
+                        <div class="product-buttons">
+                            <button class="btn-details" data-id="${product.id}">Voir détails</button>
+                            <button class="btn-favorite" data-id="${product.id}">❤️</button>
+                        </div>
+                    </div>
+                `;
+                
+                productsContainer.appendChild(card);
+            });
+        }
+
+        // OUVRIR LA MODALE
+        function openModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('modalTitle').textContent = product.name;
+                document.getElementById('modalImage').src = product.image;
+                document.getElementById('modalImage').alt = product.name;
+                document.getElementById('modalDescription').textContent = product.description;
+                document.getElementById('modalPrice').textContent = product.price;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // FERMER LA MODALE
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // AFFICHER NOTIFICATION
+        function showNotification(productName) {
+            notification.textContent = `${productName} ajouté aux favoris!`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ÉVÉNEMENTS
+        document.addEventListener('click', (e) => {
+            // Bouton "Voir détails"
+            if (e.target.classList.contains('btn-details')) {
+                const productId = parseInt(e.target.dataset.id);
+                openModal(productId);
+            }
+            
+            // Bouton "Favori"
+            if (e.target.classList.contains('btn-favorite')) {
+                const productId = parseInt(e.target.dataset.id);
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    showNotification(product.name);
+                }
+            }
+        });
+
+        // Fermer modale avec X
+        closeModalBtn.addEventListener('click', closeModal);
+        btnCloseModal.addEventListener('click', closeModal);
+
+        // Fermer modale en cliquant à l'extérieur
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Fermer modale avec Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // INITIALISATION
+        createProductCards();
+    </script>
+</html>

@@ -1,0 +1,41 @@
+        body {
+            background-color: #fff;
+            color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+         /* Personnalisation du footer et du header en noir */
+        .header-footer-dark {
+            font-family: Arial, sans-serif; 
+            font-weight: normal;              
+            font-size: 1rem;                  
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+
+        .main-content {
+            flex-grow: 1; /* Permet au contenu principal de prendre l'espace restant */
+            padding: 50px 0;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        
+        /* Styles spécifiques pour les boutons Déconnexion/Supprimer */
+        .btn-deconnexion {
+            /* Couleur marron/rouge foncé que vous utilisiez */
+            background-color: rgb(126, 18, 18) !important;
+            border-color: rgb(126, 18, 18) !important;
+            color: #fff !important;
+            font-size: 0.8rem;
+        }
+
+        .btn.btn-success:hover {
+            color: rgb(0, 0, 0); 
+        }

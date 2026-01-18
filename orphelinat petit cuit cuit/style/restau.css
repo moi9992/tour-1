@@ -1,0 +1,70 @@
+/* restau.css */
+
+body {
+    font-family: Arial, sans-serif; /* Ajout d'une police de base pour la lisibilité */
+}
+
+/* Styles pour la section "Hero" du haut */
+.head-section {
+    background-image: url('../images/cuisine.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+.head-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Assombrir légèrement l'image */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-rating {
+    font-size: 1.5rem;
+    color: #ffc107; /* Jaune pour les étoiles */
+    margin-bottom: 15px;
+}
+
+/* Couleur marron/rouge foncé pour le prix, réutilisant la couleur du bouton deconnexion */
+.text-brown {
+    color: rgb(126, 18, 18) !important;
+    font-weight: bold;
+}
+
+.plat-card {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.plat-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.other-product {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.interieur-section {
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.interieur-section img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+}
