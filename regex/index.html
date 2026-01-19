@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cas de test - Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <div class="icon">🔍</div>
+            Cas de test
+        </h1>
+
+        <table id="testTable">
+            <thead>
+                <tr>
+                    <th>Champ</th>
+                    <th>Valeur</th>
+                    <th>Résultat</th>
+                </tr>
+            </thead>
+            <tbody id="testBody">
+                <tr>
+                    <td>username</td>
+                    <td><input type="text" value="dev_42" data-field="username"></td>
+                    <td class="result"><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>username</td>
+                    <td><input type="text" value="dev 42" data-field="username"></td>
+                    <td class="result"><span class="cross">✗</span></td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td><input type="text" value="jean.dupont@gmail.com" data-field="email"></td>
+                    <td class="result"><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td><input type="text" value="jean@com" data-field="email"></td>
+                    <td class="result"><span class="cross">✗</span></td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td><input type="text" value="Azerty!1" data-field="password"></td>
+                    <td class="result"><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td><input type="text" value="Azerty" data-field="password"></td>
+                    <td class="result"><span class="check">✗</span></td>
+                </tr>
+                <tr>
+                    <td>phone</td>
+                    <td><input type="text" value="06 12 34 56 78" data-field="phone"></td>
+                    <td class="result"><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                    <td>phone</td>
+                    <td><input type="text" value="06 2 34 56 78" data-field="phone"></td>
+                    <td class="result"><span class="check">✓</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
