@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     <?php if (isset($row)) { ?>  <!-- (19) Si un utilisateur a bien été trouvé, on affiche le formulaire de modification -->
 
     <div class= mod>
-    <form method="POST" action="modification.php">
+    <form method="POST" action="modification.php?id=<?= $row['id'] ?>">
         <?php $id = isset($row['id']) ? $row['id'] : ''; ?>   <!-- (20) On vérifie que l’ID existe avant de l’afficher dans un champ caché -->
             <input type="hidden" name="id" value="<?= $id ?>">
 
@@ -95,4 +95,5 @@ if (isset($_POST['submit'])) {
         <p style="color:red;">Aucun utilisateur sélectionné pour modification.</p>
         <?php } ?>
 </body>
+
 </html>
